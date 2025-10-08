@@ -60,10 +60,10 @@ function App() {
 
   return (
     <div style={{ maxWidth: 900, margin: "0 auto", padding: 24, fontFamily: "system-ui" }}>
-      <h1 style={{ fontSize: 24, fontWeight: 700, marginBottom: 16 }}>Smart Study Tracker (Prototype)</h1>
+      <h1 style={{ fontSize: 24, fontWeight: 700, marginBottom: 16 }}>Smart Study Tracker</h1>
 
       <section style={{ background: "#fff", padding: 16, borderRadius: 12, marginBottom: 16, boxShadow: "0 1px 4px rgba(0,0,0,.08)" }}>
-        <h2 style={{ fontSize: 18, marginBottom: 8 }}>Quick add</h2>
+        <h2 style={{ fontSize: 18, marginBottom: 8, color: "#000" }}>Add Session</h2>
         <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
           <input
             value={subject}
@@ -100,10 +100,8 @@ function App() {
         </p>
       </section>
 
-  import Timer from "./components/Timer";
-// ...
   <section style={{ background:"#fff", padding:16, borderRadius:12, marginBottom:16, boxShadow:"0 1px 4px rgba(0,0,0,.08)" }}>
-    <h2 style={{ fontSize:18, marginBottom:8 }}>Pomodoro</h2>
+    <h2 style={{ fontSize:18, marginBottom:8, color: "#000"}}>Pomodoro</h2>
     <div style={{ display:"flex", gap:8, alignItems:"center", marginBottom:8 }}>
       <input value={subject} onChange={(e)=>setSubject(e.target.value)} placeholder="Subject"
             style={{ flex:1, padding:8, border:"1px solid #ddd", borderRadius:8 }} />
@@ -131,7 +129,7 @@ function App() {
 
 
       <section style={{ background: "#fff", padding: 16, borderRadius: 12, marginBottom: 16, boxShadow: "0 1px 4px rgba(0,0,0,.08)" }}>
-  <h2 style={{ fontSize: 18, marginBottom: 8 }}>Recent Sessions</h2>
+  <h2 style={{ fontSize: 18, marginBottom: 8, color: "#000" }}>Recent Sessions</h2>
 
     <ul style={{ display: "grid", gap: 8, listStyle: "none", paddingLeft: 0, margin: 0 }}>
       {sessions.length === 0 ? (
@@ -168,12 +166,8 @@ function App() {
     </ul>
   </section>
 
-
-import WeeklyBar from "./components/WeeklyBar";
-// ...
-
   <section style={{ background:"#fff", padding:16, borderRadius:12, boxShadow:"0 1px 4px rgba(0,0,0,.08)" }}>
-    <h2 style={{ fontSize:18, marginBottom:8 }}>7-day summary</h2>
+    <h2 style={{ fontSize:18, marginBottom:8, color: "#000" }}>7-day summary</h2>
     {summary ? (
       <>
         <WeeklyBar data={summary.byDay} />
