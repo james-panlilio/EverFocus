@@ -143,20 +143,6 @@ export default function TimerSessions() {
       />
     </div>
 
-    {/* Category */}
-    <div className="field category">
-      <label className="label">Category</label>
-      <select
-        className="select select-lg"
-        value={category}
-        onChange={(e) => setCategory(e.target.value)}
-      >
-        {["General", "Lectures", "Labs", "Seminars", "Revision"].map((c) => (
-          <option key={c}>{c}</option>
-        ))}
-      </select>
-    </div>
-
     {/* Duration + chips under it */}
     <div className="field duration">
       <label className="label">Duration (min)</label>
@@ -181,6 +167,20 @@ export default function TimerSessions() {
           </button>
         ))}
       </div>
+    </div>
+
+    {/* Category */}
+    <div className="field category">
+      <label className="label">Category</label>
+      <select
+        className="select select-lg"
+        value={category}
+        onChange={(e) => setCategory(e.target.value)}
+      >
+        {["General", "Lectures", "Labs", "Seminars", "Revision"].map((c) => (
+          <option key={c}>{c}</option>
+        ))}
+      </select>
     </div>
   </div>
 
