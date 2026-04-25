@@ -1,10 +1,15 @@
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
 
 export default function WeeklyBar({ data }: { data: { date: string; minutes: number }[] }) {
-  const formatted = data.map(d => ({
-    day: new Date(d.date).toLocaleDateString(undefined, { weekday: "short" }),
-    minutes: d.minutes,
-  }));
+  const formatted = data.map((entry) => {
+    const [year, month, day] = entry.date.split("-").map(Number);
+    const localDate = new Date(year, month - 1, day);
+
+    return {
+      day: localDate.toLocaleDateString(undefined, { weekday: "short" }),
+      minutes: entry.minutes,
+    };
+  });
 
   return (
     <div style={{ width: "100%", height: 260 }}>

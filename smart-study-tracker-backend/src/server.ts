@@ -3,6 +3,7 @@ import express from "express";
 import cors from "cors";
 import { PrismaClient } from "@prisma/client";
 import { z } from "zod";
+import { buildWeeklySummary } from "./analytics";
 
 const app = express();
 const prisma = new PrismaClient();
@@ -75,27 +76,15 @@ app.delete("/api/sessions/:id", async (req, res) => {
 
 app.get("/api/analytics/summary", async (req, res) => {
   const userId = typeof req.query.userId === "string" ? req.query.userId : "";
-  const from = new Date(); from.setHours(0,0,0,0); from.setDate(from.getDate() - 6);
+  const from = new Date();
+  from.setHours(0, 0, 0, 0);
+  from.setDate(from.getDate() - 6);
 
   const sessions = await prisma.session.findMany({
     where: { userId, startedAt: { gte: from } },
   });
 
-  const byDay: Record<string, number> = {};
-  for (let i = 0; i < 7; i++) {
-    const d = new Date(from); d.setDate(from.getDate() + i);
-    byDay[d.toISOString().slice(0,10)] = 0;
-  }
-  sessions.forEach(s => {
-    const key = s.startedAt.toISOString().slice(0,10);
-    byDay[key] = (byDay[key] || 0) + s.durationMin;
-  });
-
-  const series = Object.entries(byDay).map(([date, minutes]) => ({ date, minutes }));
-  const totalThisWeek = series.reduce((a,b) => a + b.minutes, 0);
-  let streak = 0; for (let i = series.length - 1; i >= 0; i--) { if (series[i].minutes > 0) streak++; else break; }
-
-  res.json({ byDay: series, totalThisWeek, streakDays: streak });
+  res.json(buildWeeklySummary(sessions));
 });
 
 
